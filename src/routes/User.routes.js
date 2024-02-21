@@ -1,10 +1,29 @@
 import { Router } from "express";
+import { createUser } from "../controllers/User.controller.js";
+import { bodyIsValid } from "../middleware/UserValidarion.js";
+import { createSwapSkill } from "../controllers/SwapSkill.controller.js";
+import { testSwapp } from "../tests/scrpit_mock.js";
 
 const userRouter = Router();
 
-userRouter.get('/user', (req, res) => { 
-    res.send("hello, world!");
+userRouter.post("/register-user", bodyIsValid, async (req, res) => { 
+    
+    const { name, email, password } = req.body;
+
+    const resultado = await createUser(name, email, password);
+
+    return res.json(resultado);
+
 })
+
+userRouter.post("/user/register-swap", async (req, res) => {
+   
+    const resultado = await testSwapp();
+    return res.json(resultado);
+
+})
+
+
 
 
 export { userRouter };

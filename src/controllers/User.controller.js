@@ -1,3 +1,12 @@
-export const createUser = (fullname, email, password) => {
-    
+import { database } from "../database/connection.js"
+import { skillEntities } from "../entities/Skill.entities.js";
+import { swapSkillEntity } from "../entities/SwapSkill.entities.js";
+import { userEntity } from "../entities/User.entities.js";
+
+
+
+export const createUser = async (name, email, password) => {
+    await database.sync();
+    await userEntity.create({ name, email, password });    
+    return userEntity.findAll();
 }

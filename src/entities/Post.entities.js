@@ -1,7 +1,7 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
 
-export const skillEntities = database.define("tb_post", {
+export const postEntities = database.define("tb_post", {
     id: {
         type: DataTypes.UUID,
         unique: true,

@@ -1,6 +1,4 @@
 import { database } from "../database/connection.js"
-import { skillEntities } from "../entities/Skill.entities.js";
-import { swapSkillEntity } from "../entities/SwapSkill.entities.js";
 import { userEntity } from "../entities/User.entities.js";
 
 

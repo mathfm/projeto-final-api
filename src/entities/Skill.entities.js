@@ -15,3 +15,6 @@ export const skillEntities = database.define("tb_skill", {
         type: DataTypes.TEXT,
     }
 })
+
+
+

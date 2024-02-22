@@ -1,6 +1,8 @@
 import { skillEntities } from "../entities/Skill.entities.js"
-import { swapSkillEntity } from "../entities/SwapSkill.entities.js"
 import { userEntity } from "../entities/User.entities.js"
+import { userSkillEntity } from "../entities/UserSkill.entities.js"
+
+
 
 export const testSwapp = async () => {
         const userExmaple = {
@@ -31,13 +33,30 @@ export const testSwapp = async () => {
     const resultUser1 = await userEntity.create(userExmaple);
     const resultUser2 = await userEntity.create(userExmaple2);
 
-    await swapSkillEntity.create({
-        username_sender_id: resultUser1.id,
-        username_recipient_id: resultUser2.id,
-        skill_desired_id: resultSkill1.id,
-        skill_offered_id: resultSkill2.id
-    });
+
+    await userSkillEntity.create({
+        user_id: resultUser1.id,
+        skill_id: resultSkill1.id
+    })
+    await userSkillEntity.create({
+        user_id: resultUser2.id,
+        skill_id: resultSkill2.id
+    })
+
+    await userSkillEntity.create({
+        user_id: resultUser2.id,
+        skill_id: resultSkill1.id
+    })
+
+    // await swapSkillEntity.create({
+    //     username_sender_id: resultUser1.id,
+    //     username_recipient_id: resultUser2.id,
+    //     skill_desired_id: resultSkill1.id,
+    //     skill_offered_id: resultSkill2.id
+    // });
 
        
-    return swapSkillEntity.findAll();  
+    return {
+        sucess: "skill registrada na conta do usuario"
+    };  
 }

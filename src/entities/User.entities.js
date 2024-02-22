@@ -25,4 +25,7 @@ const userEntity = database.define("tb_user", {
     }
 })
 
+
+
+
 export { userEntity };

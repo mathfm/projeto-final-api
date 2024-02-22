@@ -1,5 +1,8 @@
 import { database } from "../database/connection.js";
-import { DataTypes } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
+import { userEntity } from "./User.entities.js";
+import { skillEntities } from "./Skill.entities.js";
+
 
 const userSkillEntity = database.define("tb_user_skill", {
     id: {
@@ -7,29 +10,18 @@ const userSkillEntity = database.define("tb_user_skill", {
         unique: true,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
     },
-    user_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        validate: {
-            isUUID: {
-                args: 4,
-                msg: "O usuário deve ser um UUID válido."
-            }
-        }
-    },
-    skill_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        validate: {
-            isUUID: {
-                args: 4,
-                msg: "A skill deve ser um UUID válido."
-            }
-        }
-    }
 })
 
-export { userSkillEntity };
+userSkillEntity.belongsTo(userEntity, {
+    foreignKey: 'user_id',
+    constraints: true,
+})
 
+userSkillEntity.belongsTo(skillEntities, {
+    foreignKey: 'skill_id',
+    constraints: true,
+})
+
+
+export { userSkillEntity };

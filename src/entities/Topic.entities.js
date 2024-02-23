@@ -9,17 +9,18 @@ export const topicEntities = database.define("tb_topic", {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
     },
-    
+
+    title: {
+        type: DataTypes.STRING(25),
+    },    
+
     describle: {
         type: DataTypes.TEXT,
     },
 
-    title: {
-        type: DataTypes.STRING(25),
-    },
 })
 
-postEntities.belongsTo(userEntity, {
+topicEntities.belongsTo(userEntity, {
     foreignKey: 'user_id_create_topics',
     constraints: true,
 });

@@ -23,5 +23,4 @@ userSkillEntity.belongsTo(skillEntities, {
     constraints: true,
 })
 
-
 export { userSkillEntity };

@@ -7,6 +7,12 @@ export const createUser = async (name, email, password) => {
     return userEntity.findAll();
 }
 
+export const getUserData = async (id) => {
+    await database.sync();
+    const user = await userEntity.findByPk(id);
+    return user;
+}
+
 export const updatePassword = async (id, newPassword)=>{
     await database.sync();
     const user = await userEntity.findByPk(id);

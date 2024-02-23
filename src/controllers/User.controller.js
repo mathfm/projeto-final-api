@@ -20,3 +20,10 @@ export const updateEmail = async (id, newEmail)=>{
     await user.update({email:newEmail});
     return  "Email atualizado com sucesso!";
 }
+
+export const destroyUser = async (id)=>{
+    await database.sync();
+    const user = await userEntity.findByPk(id);
+    await user.destroy();
+    return  "Usuario deletado!";
+}

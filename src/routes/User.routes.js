@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, updateEmail, updatePassword } from "../controllers/User.controller.js";
+import { createUser, destroyUser, updateEmail, updatePassword } from "../controllers/User.controller.js";
 import { bodyIsValid } from "../middleware/UserValidarion.js";
 import { createSwapSkill } from "../controllers/SwapSkill.controller.js";
 import { testSwapp } from "../tests/scrpit_mock.js";
@@ -32,6 +32,12 @@ userRouter.post("/user/change-password", async (req, res) =>{
 userRouter.post("/user/change-email", async (req, res) =>{
     const {id, newEmail} = req.body;
     const result = await updateEmail(id, newEmail);
+    res.json(result);
+})
+
+userRouter.post("/user/delete-me", async (req, res) =>{
+    const {id} = req.body;
+    const result = await destroyUser(id);
     res.json(result);
 })
 

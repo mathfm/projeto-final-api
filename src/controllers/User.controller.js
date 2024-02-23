@@ -13,3 +13,10 @@ export const updatePassword = async (id, newPassword)=>{
     await user.update({password:newPassword});
     return  "Senha atualizada com sucesso!";
 }
+
+export const updateEmail = async (id, newEmail)=>{
+    await database.sync();
+    const user = await userEntity.findByPk(id);
+    await user.update({email:newEmail});
+    return  "Email atualizado com sucesso!";
+}

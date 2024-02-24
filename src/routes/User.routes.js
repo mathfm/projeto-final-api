@@ -1,12 +1,11 @@
 import { Router } from "express";
 import { createUser } from "../controllers/User.controller.js";
-import { bodyIsValid } from "../middleware/UserValidarion.js";
-import { createSwapSkill } from "../controllers/SwapSkill.controller.js";
 import { testSwapp } from "../tests/scrpit_mock.js";
+import { userValidateCreate } from "../shared/middleware/UserValidarion.js";
 
 const userRouter = Router();
 
-userRouter.post("/register-user", bodyIsValid, async (req, res) => { 
+userRouter.post("/register-user", userValidateCreate, async (req, res) => { 
     
     const { name, email, password } = req.body;
 

@@ -4,7 +4,7 @@ import { userEntity } from "./User.entities.js";
 import { skillEntities } from "./Skill.entities.js";
 
 
-const userSkillEntity = database.define("tb_user_skill", {
+export const userSkillEntity = database.define("tb_user_skill", {
     id: {
         type: DataTypes.UUID,
         unique: true,
@@ -23,4 +23,4 @@ userSkillEntity.belongsTo(skillEntities, {
     constraints: true,
 })
 
-export { userSkillEntity };
+

@@ -13,12 +13,12 @@ export const swapSkillEntity = database.define("tb_swap_skill", {
 })
 
 swapSkillEntity.belongsTo(userEntity, {
-    foreignKey: 'username_sender_id',
+    foreignKey: 'user_sender_id',
     constraints: true,
 });
 
 swapSkillEntity.belongsTo(userEntity, {
-    foreignKey: 'username_recipient_id',
+    foreignKey: 'user_recipient_id',
     constraints: true,
 });
 

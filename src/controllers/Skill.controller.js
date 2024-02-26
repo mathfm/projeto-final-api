@@ -15,8 +15,21 @@ export const createSkill = async (req, res) => {
 
 export const updateDescrible = async (id, newDescrible) =>{
     await database.sync();
-    const user = await userEntity.findByPk(id);
-    await user.update({describle:newDescrible});
+    const skill = await skillEntities.findByPk(id);
+    await skill.update({describle:newDescrible});
     return  "Descrição atualizada com sucesso";
 };
 
+export const updateSkillName = async (id, newName) =>{
+    await database.sync();
+    const skill = await skillEntities.findByPk(id);
+    await skill.update({skill_name:newName});
+    return  "Nome atualizado com sucesso!";
+};
+
+export const destroySkill = async (id)=>{
+    await database.sync();
+    const skill = await skillEntities.findByPk(id);
+    await skill.destroy();
+    return  "Habilidade deletada!";
+}

@@ -13,6 +13,12 @@ export const createSkill = async (req, res) => {
     }
 };
 
+export const getSkill = async (id) => {
+    await database.sync();
+    const skill = await skillEntities.findByPk(id);
+    return skill;
+}
+
 export const updateDescrible = async (id, newDescrible) =>{
     await database.sync();
     const skill = await skillEntities.findByPk(id);

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createUser, destroyUser, getUserData, registerUserSkill, updateEmail, updatePassword } from "../controllers/User.controller.js";
 import { testSwapp } from "../tests/scrpit_mock.js";
-import { userValidateCreate } from "../shared/middleware/UserValidarion.js";
+import { userValidateCreate } from "../shared/middleware/UserValidator.js";
 import { userSkillValidateCreate } from "../shared/middleware/UserSkillValidator.js";
 import { swapSkillValidateCreate } from "../shared/middleware/SwapSkillValidator.js";
 import { createSwapSkill } from "../controllers/SwapSkill.controller.js";

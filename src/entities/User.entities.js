@@ -12,6 +12,10 @@ const userEntity = database.define("tb_user", {
         type: DataTypes.STRING(50),
         allowNull: false,
     },
+    username: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+    },
     email: {
         type: DataTypes.STRING(40),
         allowNull: false,
@@ -24,7 +28,6 @@ const userEntity = database.define("tb_user", {
         allowNull: false,
     }
 })
-
 
 
 

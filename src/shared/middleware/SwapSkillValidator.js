@@ -18,7 +18,7 @@ export const swapSkillValidateCreate = async (req, res, next) => {
             skill_desired_id: req.body.skill_desired_id,
             skill_offered_id: req.body.skill_offered_id
         }
-        console.log("passou aqui");
+
         await swapSkillSchema.validate(userInvited, { abortEarly: false });
         const usernameRecipientIsValid = await userEntity.findByPk(userInvited.user_recipient_id);
 

@@ -1,18 +1,18 @@
 import { Router } from "express";
 import { createUser, destroyUser, getUserData, registerUserSkill, updateEmail, updatePassword } from "../controllers/User.controller.js";
 import { testSwapp } from "../tests/scrpit_mock.js";
-import { userValidateCreate } from "../shared/middleware/UserValidator.js";
 import { userSkillValidateCreate } from "../shared/middleware/UserSkillValidator.js";
 import { swapSkillValidateCreate } from "../shared/middleware/SwapSkillValidator.js";
 import { createSwapSkill } from "../controllers/SwapSkill.controller.js";
+import { userMiddlewareList } from "../shared/middleware/User.middleware.js";
 
 const userRouter = Router();
 
-userRouter.post("/register-user", userValidateCreate, async (req, res) => { 
+userRouter.post("/register-user", userMiddlewareList, async (req, res) => { 
     
-    const { name, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    const resultado = await createUser(name, email, password);
+    const resultado = await createUser(name, username, email, password);
 
     return res.json(resultado);
 

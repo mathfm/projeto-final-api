@@ -2,9 +2,9 @@ import { database } from "../database/connection.js"
 import { userEntity } from "../entities/User.entities.js";
 import { userSkillEntity } from "../entities/UserSkill.entities.js";
 
-export const createUser = async (name, email, password) => {
+export const createUser = async (name, username, email, password) => {
     await database.sync();
-    await userEntity.create({ name, email, password });    
+    await userEntity.create({ name, username, email, password });    
     return userEntity.findAll();
 }
 

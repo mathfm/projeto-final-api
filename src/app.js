@@ -1,7 +1,7 @@
 import express from "express";
 import { userRouter } from "./routes/User.routes.js";
 import { testConnection } from "./database/connection.js";
-import { skillRouter } from "./routes/Skill.rotes.js";
+import { skillRouter } from "./routes/Skill.routes.js";
 
 
 const app = express();

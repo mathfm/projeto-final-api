@@ -3,7 +3,7 @@ import { skillEntities } from "../../entities/Skill.entities.js";
 
 const skillSchema = object({
     skill_name: string().required().min(3).max(20).lowercase(),
-    describle_skill: string().required().min(5).max(200).lowercase()
+    describle: string().required().min(5).max(200).lowercase()
 });
 
 export const skillCreateValidator = async (req, res, next) => {

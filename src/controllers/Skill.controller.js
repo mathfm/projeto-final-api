@@ -12,3 +12,11 @@ export const createSkill = async (req, res) => {
         return res.status(404).json({ error: error.message });
     }
 };
+
+export const updateDescrible = async (id, newDescrible) =>{
+    await database.sync();
+    const user = await userEntity.findByPk(id);
+    await user.update({describle:newDescrible});
+    return  "Descrição atualizada com sucesso";
+};
+

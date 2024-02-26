@@ -10,17 +10,25 @@ skillRouter.post("/register-skill", skillCreateValidator, async (req, res) => {
 });
 
 skillRouter.post("/skill/get", async (req, res) => {
-    return await getSkill(req, res);
-})
+    const {id} = req.body;
+    const result = await getSkill(id);
+    res.json(result);
+});
 
 skillRouter.post("/skill/update-name", async (req, res) => {
-    return await updateSkillName(req, res);
-})
+    const {id, newName} = req.body;
+    const result = await updateSkillName(id, newName);
+    res.json(result);
+});
 
 skillRouter.post("/skill/update-describle", async (req, res) => {
-    return await updateDescrible(req, res);
-})
+    const {id, newDescrible} = req.body;
+    const result = await updateDescrible(id, newDescrible);
+    res.json(result);
+});
 
 skillRouter.post("/skill/delete-me", async (req, res) => {
-    return await destroySkill(req, res);
-})
+    const {id} = req.body;
+    const result = await destroySkill(id);
+    res.json(result);
+});

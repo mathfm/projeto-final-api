@@ -11,7 +11,7 @@ export const skillEntities = database.define("tb_skill", {
     skill_name: {
         type: DataTypes.STRING(30),
     },
-    describle_skill: {
+    describle: {
         type: DataTypes.TEXT,
     }
 })

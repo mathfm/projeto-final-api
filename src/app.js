@@ -5,7 +5,7 @@ import { skillRouter } from "./routes/Skill.routes.js";
 
 
 const app = express();
-const port = 8001;
+const port = 3306;
 
 app.use(express.json());
 app.use(userRouter);

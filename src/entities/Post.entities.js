@@ -3,6 +3,7 @@ import { DataTypes, Sequelize } from "sequelize";
 import { userEntity } from "./User.entities.js";
 import { topicEntities } from "./Topic.entities.js"
 
+
 export const postEntities = database.define("tb_post", {
     id: {
         type: DataTypes.UUID,
@@ -25,3 +26,4 @@ postEntities.belongsTo(topicEntities, {
     foreignKey: 'topic_id_commented',
     constraints: true,
 });
+

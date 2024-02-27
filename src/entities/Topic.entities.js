@@ -1,6 +1,7 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
 import { userEntity } from "./User.entities.js";
+import { skillEntities } from "./Skill.entities.js";
 
 export const topicEntities = database.define("tb_topic", {
     id: {
@@ -14,13 +15,18 @@ export const topicEntities = database.define("tb_topic", {
         type: DataTypes.STRING(25),
     },    
 
-    describle: {
+    description: {
         type: DataTypes.TEXT,
     },
 
 })
 
 topicEntities.belongsTo(userEntity, {
-    foreignKey: 'user_id_create_topics',
+    foreignKey: 'user_id_create_topic',
+    constraints: true,
+});
+
+topicEntities.belongsTo(skillEntities, {
+    foreignKey: 'skill_id_category',
     constraints: true,
 });

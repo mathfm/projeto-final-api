@@ -13,29 +13,50 @@ export const createSkill = async (req, res) => {
     }
 };
 
-export const getSkill = async (id) => {
-    await database.sync();
-    const skill = await skillEntities.findByPk(id);
-    return skill;
+export const getSkill = async (req, res) => {
+    try{
+        await database.sync();
+        const {id} = req.body;
+        const skill = await skillEntities.findByPk(id);
+        return skill;
+    } catch(error){
+        return res.status(404).json({ error: error.message });
+    }
 }
 
-export const updateDescrible = async (id, newDescrible) =>{
-    await database.sync();
-    const skill = await skillEntities.findByPk(id);
-    await skill.update({describle:newDescrible});
-    return  "Descrição atualizada com sucesso";
+export const updateDescrible = async (req, res) =>{
+    try{
+        await database.sync();
+        const {id, newDescrible} = req.body;
+        const skill = await skillEntities.findByPk(id);
+        await skill.update({describle:newDescrible});
+        return  "Descrição atualizada com sucesso";
+    } catch(error){
+        return res.status(404).json({ error: error.message });
+    }
+
 };
 
-export const updateSkillName = async (id, newName) =>{
-    await database.sync();
-    const skill = await skillEntities.findByPk(id);
-    await skill.update({skill_name:newName});
-    return  "Nome atualizado com sucesso!";
+export const updateSkillName = async (req, res) =>{
+    try{
+        await database.sync();
+        const { id, newName } = req.body;
+        const skill = await skillEntities.findByPk(id);
+        await skill.update({skill_name:newName});
+        return  "Nome atualizado com sucesso!";
+    } catch(error){
+        return res.status(404).json({ error: error.message });
+    }
 };
 
 export const destroySkill = async (id)=>{
-    await database.sync();
-    const skill = await skillEntities.findByPk(id);
-    await skill.destroy();
-    return  "Habilidade deletada!";
+    try{
+        await database.sync();
+        const { id } = req.body;
+        const skill = await skillEntities.findByPk(id);
+        await skill.destroy();
+        return  "Habilidade deletada!";
+    } catch(error){
+        return res.status(404).json({ error: error.message });
+    }
 }

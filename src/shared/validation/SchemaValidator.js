@@ -4,7 +4,7 @@ import { ValidationError } from "yup";
 export const schemaValidation = async (schema, value) => {
     try {
         await schema.validate(value, { abortEarly: false })
-        return;
+        return null;
         
     } catch (error) {
         const captureErros = [];

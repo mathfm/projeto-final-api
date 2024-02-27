@@ -4,11 +4,12 @@ import { testSwapp } from "../tests/scrpit_mock.js";
 import { userSkillValidateCreate } from "../shared/middleware/UserSkillValidator.js";
 import { swapSkillValidateCreate } from "../shared/middleware/SwapSkillValidator.js";
 import { createSwapSkill } from "../controllers/SwapSkill.controller.js";
-import { userMiddlewareList } from "../shared/middleware/User.middleware.js";
+import { userMiddleware } from "../shared/middleware/User.middleware.js";
+import { userSkillMiddleare } from "../shared/middleware/UserSkill.middleware.js";
 
 const userRouter = Router();
 
-userRouter.post("/register-user", userMiddlewareList, async (req, res) => { 
+userRouter.post("/register-user", userMiddleware, async (req, res) => { 
     
     const { name, username, email, password } = req.body;
 
@@ -49,7 +50,7 @@ userRouter.post("/user/get-data", async (req, res) =>{
     res.json(result);
 })
 
-userRouter.post("/user/:user_id/register-skill", userSkillValidateCreate, async(req, res) => {
+userRouter.post("/user/:user_id/register-skill", userSkillMiddleare, async(req, res) => {
     return await registerUserSkill(req, res);
 })
 

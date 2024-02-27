@@ -11,16 +11,18 @@ export const userSkillEntity = database.define("tb_user_skill", {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
     },
-})
+});
+
+
 
 userSkillEntity.belongsTo(userEntity, {
     foreignKey: 'user_id',
     constraints: true,
-})
+});
 
 userSkillEntity.belongsTo(skillEntities, {
     foreignKey: 'skill_id',
     constraints: true,
-})
+});
 
 

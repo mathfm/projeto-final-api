@@ -21,7 +21,7 @@ export const userSkillSchema = object({
 
 export const swapSkillSchema = object({
     user_sender_id: string().required().length(36),
-    user_sender_id: string().required().length(36),
-    skill_desired_id: string().required().length(36),
-    skill_offered_id: string().required().length(36)
+    skill_offered_id: string().required().length(36),
+    user_recipient_id: string().required().length(36),
+    skill_desired_id: string().required().length(36)
 });

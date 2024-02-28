@@ -10,6 +10,7 @@ const port = 3306;
 app.use(express.json());
 app.use(userRouter);
 app.use(skillRouter);
+app.use(topicRouter)
 
 
 

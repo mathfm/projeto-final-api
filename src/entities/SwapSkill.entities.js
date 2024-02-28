@@ -10,6 +10,10 @@ export const swapSkillEntity = database.define("tb_swap_skill", {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
     },
+    statusInvited: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
 })
 
 swapSkillEntity.belongsTo(userEntity, {

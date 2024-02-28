@@ -1,16 +1,23 @@
-import { schemaMiddleware } from "./Schema.middleware.js";
-import { verityEmailAndUsername } from "./validation/EmailUserValidation.js";
+import { userEntity } from "../../entities/User.entities.js"
+import { userSchema } from "../schemas.js";
+import { fieldExist } from "../validation/FieldsValidation.js"
+import { schemaValidation } from "../validation/SchemaValidator.js";
 
-export  const userMiddlewareList = (req, res, next) => {
-    const middlewaresList = [verityEmailAndUsername, schemaMiddleware];
 
-    const runMiddleware = index => {
-        if (index < middlewaresList.length) {
-            const currentMiddleware = middlewaresList[index];
-            currentMiddleware(req, res, () => runMiddleware(index + 1));
-        } else {
+
+export const userMiddleware = async (req, res, next) => {
+    const emailExist = await fieldExist(userEntity, "email", req.body.email);
+    const usernameExist = await fieldExist(userEntity, "username", req.body.username);
+    const errorFields = await schemaValidation(userSchema, req.body);
+
+    if (!errorFields) {
+        if (!usernameExist && !emailExist) {
             next();
+        } else {
+            res.status(400).json({ error: "Email ou username já esta registrado"});
         }
-    };
-    runMiddleware(0);
-};
+    } else {
+        res.status(400).json({ errors: errorFields });
+    }
+
+}

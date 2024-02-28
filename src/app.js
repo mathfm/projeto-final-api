@@ -1,12 +1,11 @@
 import express from "express";
 import { userRouter } from "./routes/User.routes.js";
 import { testConnection } from "./database/connection.js";
-import { skillRouter } from "./routes/Skill.rotes.js";
-import { topicRouter } from "./routes/Topic.routes.js";
+import { skillRouter } from "./routes/Skill.routes.js";
 
 
 const app = express();
-const port = 3000;
+const port = 3306;
 
 app.use(express.json());
 app.use(userRouter);

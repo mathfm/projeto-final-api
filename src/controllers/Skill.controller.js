@@ -29,7 +29,7 @@ export const updateDescrible = async (req, res) =>{
         await database.sync();
         const {id, newDescrible} = req.body;
         const skill = await skillEntities.findByPk(id);
-        await skill.update({describle:newDescrible});
+        await skill.update({ describle: newDescrible });
         return res.status(200).json({ message: "Descrição atualizada com sucesso" });
     } catch(error){
         return res.status(404).json({ error: error.message });

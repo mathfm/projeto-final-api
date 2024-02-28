@@ -1,7 +1,7 @@
 import { skillEntities } from "../../entities/Skill.entities.js";
 import { skillSchema } from "../schemas.js"
 import { fieldExist } from "../validation/FieldsValidation.js";
-import { schemaValidation } from "../validation/SchemaValidator.js"
+import { schemaValidation } from "../validation/SchemaValidation.js"
 
 export const skillMiddleware = async (req, res, next) => {
     const skillExist = await fieldExist(skillEntities, "skill_name", req.body.skill_name);

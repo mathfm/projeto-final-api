@@ -3,7 +3,7 @@ import { userEntity } from "../../entities/User.entities.js";
 import { userSkillEntity } from "../../entities/UserSkill.entities.js";
 import { userSkillSchema } from "../schemas.js";
 import { fieldExist } from "../validation/FieldsValidation.js";
-import { schemaValidation } from "../validation/SchemaValidator.js";
+import { schemaValidation } from "../validation/SchemaValidation.js";
 
 export const verificyExistUserSkill = async (objectUser) => {
     const userSkillExist = await userSkillEntity.findAll({

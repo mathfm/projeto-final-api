@@ -2,7 +2,7 @@ import { skillEntities } from "../../entities/Skill.entities.js";
 import { topicEntities } from "../../entities/Topic.entities.js"
 import { userEntity } from "../../entities/User.entities.js";
 import { topicSchema } from "../schemas.js";
-import { schemaValidation } from "../validation/SchemaValidator.js"
+import { schemaValidation } from "../validation/SchemaValidation.js"
 
 
 export const topicMiddleware = async (req, res, next) => {

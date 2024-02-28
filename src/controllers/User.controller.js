@@ -1,38 +1,60 @@
+import { where } from "sequelize";
 import { database } from "../database/connection.js"
 import { userEntity } from "../entities/User.entities.js";
 import { userSkillEntity } from "../entities/UserSkill.entities.js";
 
-export const createUser = async (name, username, email, password) => {
-    await database.sync();
-    await userEntity.create({ name, username, email, password });    
-    return await userEntity.findAll();
+export const createUser = async (req, res) => {
+    try {
+        await database.sync();
+        const { name, username, email, password } = req.body; 
+        await userEntity.create({ name, username, email, password });    
+        const user = await userEntity.findOne({ where: { email: email } });
+        return res.status(201).json({ sucess: "Cadastro feito com sucesso", user: user });;       
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
 }
 
-export const getUserData = async (id) => {
+export const getUser = async (req, res) => {
     await database.sync();
-    const user = await userEntity.findByPk(id);
-    return user;
+    const { user_id } = req.params;
+    const user = await userEntity.findOne({ where: { id: user_id } });
+    return res.status(200).json({ user: user });
 }
 
-export const updatePassword = async (id, newPassword)=>{
-    await database.sync();
-    const user = await userEntity.findByPk(id);
-    await user.update({password:newPassword});
-    return  "Senha atualizada com sucesso!";
+export const updatePassword = async (req, res) => {
+    try {
+        await database.sync();
+        const { user_id } = req.params;
+        const { password } = req.body;
+        await userEntity.update({ password: password }, { where: { id: user_id } });
+        return res.status(200).json({ sucess: "Senha trocada com sucesso!" });        
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
 }
 
-export const updateEmail = async (id, newEmail)=>{
-    await database.sync();
-    const user = await userEntity.findByPk(id);
-    await user.update({email:newEmail});
-    return  "Email atualizado com sucesso!";
+export const updateEmail = async (req, res) => {
+    try {
+        await database.sync();
+        const { user_id } = req.params;
+        const { email } = req.body;
+        await userEntity.update({ email: email }, { where: { id: user_id } });
+        return res.status(200).json({ sucess: "Seu email foi alterado!" });
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
 }
 
-export const destroyUser = async (id)=>{
-    await database.sync();
-    const user = await userEntity.findByPk(id);
-    await user.destroy();
-    return  "Usuario deletado!";
+export const deleteUser = async (req, res) => {
+    try {
+        await database.sync();
+        const { user_id } = req.params;
+        userEntity.destroy({where: { id: user_id } });
+        return res.status(200).json({ sucess: "Usuario deletado com sucesso!" });        
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
 }
 
 export const registerUserSkill = async (req, res) => {

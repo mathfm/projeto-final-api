@@ -32,3 +32,12 @@ export const topicSchema = object({
     user_id_create_topic: string().required().length(36),
     skill_id_category: string().required().length(36)
 })
+
+export const schemaReduceGenerator = (schema, properties) => {
+    const schemaReduce = object().shape(
+        Object.fromEntries(
+            properties.map(property => [property, schema.fields[property]])
+        )
+    )
+    return schemaReduce;
+}

@@ -5,8 +5,8 @@ import { skillEntities } from "../entities/Skill.entities.js";
 export const createSkill = async (req, res) => {
     try {
         await database.sync();
-        const { skill_name, describle } = req.body;
-        await skillEntities.create({ skill_name, describle });
+        const { skill_name, description } = req.body;
+        await skillEntities.create({ skill_name, description });
         return res.status(201).json({ message: "skill registrada com sucesso" });
     } catch (error) {
         return res.status(404).json({ error: error.message });
@@ -16,44 +16,44 @@ export const createSkill = async (req, res) => {
 export const getSkill = async (req, res) => {
     try{
         await database.sync();
-        const {id} = req.body;
-        const skill = await skillEntities.findByPk(id);
-        return res.status(200).json({skill});
+        const { skill_id } = req.params;
+        const skill = await skillEntities.findOne({ where: { id: skill_id } });
+        return res.status(200).json({ skill: skill });
     } catch(error){
         return res.status(404).json({ error: error.message });
     }
 }
 
-export const updateDescrible = async (req, res) =>{
-    try{
+export const getAllSkill = async (req, res) => { 
+    try {
+        const skills = await skillEntities.findAll();
+        return res.status(200).json({ skills });
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
+}
+
+export const updateSkill = async (req, res) =>{
+    try {
+        
         await database.sync();
-        const {id, newDescrible} = req.body;
-        const skill = await skillEntities.findByPk(id);
-        await skill.update({ describle: newDescrible });
-        return res.status(200).json({ message: "Descrição atualizada com sucesso" });
+        const { skill_id } = req.params;
+        const { skill_name, description } = req.body;
+
+        const skill = await skillEntities.findByPk(skill_id);
+        await skill.update({skill_name: skill_name, description: description});
+        return res.status(200).json({ message: "Informações atualizada com sucesso!"});
     } catch(error){
         return res.status(404).json({ error: error.message });
     }
-
 };
 
-export const updateSkillName = async (req, res) =>{
-    try{
-        await database.sync();
-        const { id, newName } = req.body;
-        const skill = await skillEntities.findByPk(id);
-        await skill.update({skill_name:newName});
-        return res.status(200).json({ message: "Nome atualizado com sucesso!"});
-    } catch(error){
-        return res.status(404).json({ error: error.message });
-    }
-};
 
-export const destroySkill = async (req, res)=>{
+export const deleteSkill = async (req, res)=>{
     try{
         await database.sync();
-        const { id } = req.body;
-        const skill = await skillEntities.findByPk(id);
+        const { skill_id } = req.params;
+        const skill = await skillEntities.findByPk(skill_id);
         await skill.destroy();
         return res.status(200).json({ message: "Habilidade deletada!"});
     } catch(error){

@@ -9,8 +9,8 @@ export const userSchema = object({
 })
 
 export const skillSchema = object({
-    skill_name: string().required().min(3).max(20).lowercase(),
-    describle: string().required().min(5).max(200).lowercase()
+    skill_name: string().required().min(2).max(20).lowercase(),
+    description: string().required().min(5).max(200).lowercase()
 });
 
 export const userSkillSchema = object({

@@ -5,7 +5,7 @@ import { userSkillEntity } from "../entities/UserSkill.entities.js";
 export const createUser = async (name, username, email, password) => {
     await database.sync();
     await userEntity.create({ name, username, email, password });    
-    return userEntity.findAll();
+    return await userEntity.findAll();
 }
 
 export const getUserData = async (id) => {

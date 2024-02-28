@@ -47,3 +47,25 @@ export const registerUserSkill = async (req, res) => {
     }
     
 }
+
+export const updateProfile = async (req, res) => {
+    try {
+        const userInfoUpdate = {
+            name: req.body.name,
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        }
+
+        await userEntity.update(userInfoUpdate, {
+            where: {
+                id: req.params.user_id
+            }
+        })
+
+        return res.status(200).json({ message: "Perfil atualizado com sucesso!" });
+
+    } catch (error) {
+        return res.status(404).json({ error: error.message })
+    }
+}

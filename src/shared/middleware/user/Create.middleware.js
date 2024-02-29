@@ -1,5 +1,7 @@
 import { userEntity } from "../../../entities/User.entities.js";
 import { userSchema } from "../../schemas.js";
+import { fieldExist } from "../../validation/FieldsValidation.js";
+import { schemaValidation } from "../../validation/SchemaValidation.js";
 
 export const userMiddleware = async (req, res, next) => {
     const emailExist = await fieldExist(userEntity, "email", req.body.email);

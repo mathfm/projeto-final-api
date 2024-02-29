@@ -1,5 +1,5 @@
 import { userEntity } from "../../../entities/User.entities.js";
-import { userSchema } from "../../schemas.js";
+import { schemaReduceGenerator, userSchema } from "../../schemas.js";
 import { schemaValidation } from "../../validation/SchemaValidation.js";
 
 export const updatePasswordMiddleware = async (req, res, next) => { 

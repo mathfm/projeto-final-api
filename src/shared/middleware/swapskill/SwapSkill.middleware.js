@@ -1,9 +1,9 @@
-import { swapSkillEntity } from "../../entities/SwapSkill.entities.js"
-import { userEntity } from "../../entities/User.entities.js"
-import { userSkillEntity } from "../../entities/UserSkill.entities.js"
-import { swapSkillSchema } from "../schemas.js"
-import { fieldExist } from "../validation/FieldsValidation.js"
-import { schemaValidation } from "../validation/SchemaValidation.js"
+import { swapSkillEntity } from "../../../entities/SwapSkill.entities.js"
+import { userEntity } from "../../../entities/User.entities.js"
+import { userSkillEntity } from "../../../entities/UserSkill.entities.js"
+import { swapSkillSchema } from "../../schemas.js"
+import { fieldExist } from "../../validation/FieldsValidation.js"
+import { schemaValidation } from "../../validation/SchemaValidation.js"
 
 
 const verificyExistSwapSkill = async (user_sender_id, user_recipient_id) => {
@@ -24,8 +24,12 @@ export const swapSkillMiddleware = async (req, res, next) => {
         skill_desired_id: req.body.skill_desired_id
     }
 
-    if (invitedSwapSkill.user_recipient_id === invitedSwapSkill.user_recipient_id) {
+    if (invitedSwapSkill.user_sender_id === invitedSwapSkill.user_recipient_id) {
         return res.status(400).json({ errors: { error: "Id de quem você esta enviando a solicitação não pode ser o mesmo", path: "user_recipient_id" } });
+    }
+
+    if (invitedSwapSkill.skill_offered_idd === invitedSwapSkill.skill_desired_id) {
+    return res.status(400).json({ errors: { error: "Ambas skills são iguais, não e possivel realizar o convite.", path: "skill_recipient_id" } });
     }
 
     const schemaSwapValidationErros = await schemaValidation(swapSkillSchema, invitedSwapSkill)

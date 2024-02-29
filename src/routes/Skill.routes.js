@@ -3,6 +3,7 @@ import { createSkill, getSkill, deleteSkill, updateSkill, getAllSkill } from "..
 import { createSkillMiddleware } from "../shared/middleware/skill/Create.middleware.js";
 import { verifyIdSkillMiddleware } from "../shared/middleware/skill/SkillVerifyID.middleware.js";
 import { skillUpdateMiddleware } from "../shared/middleware/skill/Update.middleware.js";
+import { deleteSkillMiddleware } from "../shared/middleware/skill/Delete.middleware.js";
 
 export const skillRouter = Router();
 
@@ -23,6 +24,6 @@ skillRouter.put("/skill/:skill_id/update", verifyIdSkillMiddleware, skillUpdateM
 });
 
 
-skillRouter.delete("/skill/:skill_id/delete-skill", verifyIdSkillMiddleware, async (req, res) => {
+skillRouter.delete("/skill/:skill_id/delete-skill", verifyIdSkillMiddleware, deleteSkillMiddleware, async (req, res) => {
     return deleteSkill(req, res);
 });

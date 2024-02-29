@@ -1,5 +1,6 @@
 import { userEntity } from "../../../entities/User.entities.js";
 import { schemaReduceGenerator, userSchema } from "../../schemas.js";
+import { fieldExist } from "../../validation/FieldsValidation.js";
 import { schemaValidation } from "../../validation/SchemaValidation.js";
 
 export const updateUsernameMiddleware = async (req, res, next) => {

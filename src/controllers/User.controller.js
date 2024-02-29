@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { database } from "../database/connection.js"
 import { userEntity } from "../entities/User.entities.js";
 import { userSkillEntity } from "../entities/UserSkill.entities.js";
@@ -89,5 +88,25 @@ export const updateProfile = async (req, res) => {
 
     } catch (error) {
         return res.status(404).json({ error: error.message })
+    }
+}
+
+export const deleteUserSkill = async (req, res) => {
+    try {
+        const { user_skill_id } = req.params;
+        await userSkillEntity.destroy({ where: { id: user_skill_id } });
+        return res.status(200).json({ sucess: "Skill removida da sua conta com sucesso!" });        
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
+}
+
+export const getAllSkillUser = async (req, res) => { 
+    try {
+        const { user_id } = req.params;
+        const skills_list = await userSkillEntity.findAll({ where: { user_id: user_id } });
+        return res.status(200).json({ skills_list });
+    } catch (error) {
+        return res.status(404).json({ error: error.message });
     }
 }

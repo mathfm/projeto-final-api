@@ -1,9 +1,10 @@
-import { skillEntities } from "../../entities/Skill.entities.js";
-import { userEntity } from "../../entities/User.entities.js";
-import { userSkillEntity } from "../../entities/UserSkill.entities.js";
-import { userSkillSchema } from "../schemas.js";
-import { fieldExist } from "../validation/FieldsValidation.js";
-import { schemaValidation } from "../validation/SchemaValidation.js";
+
+import { skillEntities } from "../../../entities/Skill.entities.js";
+import { userSkillEntity } from "../../../entities/UserSkill.entities.js";
+import { userSkillSchema } from "../../schemas.js";
+import { fieldExist } from "../../validation/FieldsValidation.js";
+import { schemaValidation } from "../../validation/SchemaValidation.js";
+
 
 export const verificyExistUserSkill = async (objectUser) => {
     const userSkillExist = await userSkillEntity.findAll({
@@ -24,17 +25,11 @@ export const userSkillMiddleare = async (req, res, next) => {
         const schemaUserSkillErrors = await schemaValidation(userSkillSchema, {user_id, skill_id});
 
         if (schemaUserSkillErrors) {
-            return res.status(400).json({ errors: schemaUserSkillErrors });
+            return res.status(400).json({ errors: schemaUserSkillErrors});
         }
+        
+        const skillExist = await fieldExist(skillEntities, "id", skill_id);
 
-        const [userExist, skillExist] = await Promise.all([
-            fieldExist(userEntity, "id", user_id),
-            fieldExist(skillEntities, "id", skill_id),
-        ])
-
-        if (!userExist) {
-            return res.status(400).json({ errors: { error: "Usuário não encontrado", path: "user_id" } });
-        }
 
         if (!skillExist) {
             return res.status(400).json({ errors: { error: "Skill não encontrada", path: "skill_id" } });
@@ -50,7 +45,7 @@ export const userSkillMiddleare = async (req, res, next) => {
 
     } catch (error) {
         res.status(400).json({
-            errors: { error }
+            errors: error.message 
         })
     }
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createSkill, getSkill, deleteSkill, updateSkill, getAllSkill } from "../controllers/Skill.controller.js";
+import { createSkill, getSkill, deleteSkill, updateSkill, getAllSkill } from "../controllers/skill.controller.js";
 import { createSkillMiddleware } from "../shared/middleware/skill/createSkill.middleware.js";
 import { verifyIdSkillMiddleware } from "../shared/middleware/skill/verifyIdSkill.middleware.js";
 import { updateSkillMiddleware } from "../shared/middleware/skill/updateSkill.middleware.js";

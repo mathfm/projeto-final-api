@@ -1,8 +1,7 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
-import { userEntity } from "./User.entities.js";
-import { topicEntities } from "./Topic.entities.js"
-
+import { userEntities } from "./User.entities.js";
+import { skillEntities } from "./Skill.entities.js";
 
 export const postEntities = database.define("tb_post", {
     id: {
@@ -12,18 +11,22 @@ export const postEntities = database.define("tb_post", {
         defaultValue: Sequelize.UUIDV4,
     },
 
-    content: {
+    title: {
+        type: DataTypes.STRING(25),
+    },    
+
+    description: {
         type: DataTypes.TEXT,
     },
+
 })
 
-postEntities.belongsTo(userEntity, {
-    foreignKey: 'user_id_post',
+postEntities.belongsTo(userEntities, {
+    foreignKey: 'author_id',
     constraints: true,
 });
 
-postEntities.belongsTo(topicEntities, {
-    foreignKey: 'topic_id_commented',
+postEntities.belongsTo(skillEntities, {
+    foreignKey: 'skill_id',
     constraints: true,
 });
-

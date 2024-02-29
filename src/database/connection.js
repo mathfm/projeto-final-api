@@ -7,7 +7,7 @@ const database = new Sequelize("db_forum", "root", "", {
 
 export async function testConnection() {
     try {
-        database.sync();
+        database.sync({ force: true });
         await database.authenticate();
         console.log("conexão com o banco estabelecida");
     } catch (error) {

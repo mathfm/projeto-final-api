@@ -1,5 +1,5 @@
 import { skillEntities } from "../../../entities/Skill.entities.js";
-import { topicEntities } from "../../../entities/Topic.entities.js"
+import { postEntities } from "../../../entities/Post.entities.js"
 import { userEntities } from "../../../entities/User.entities.js";
 import { topicSchema } from "../../schemas.js";
 import { schemaValidation } from "../../validation/schema.validation.js"
@@ -31,7 +31,7 @@ export const topicMiddleware = async (req, res, next) => {
         return res.status(400).json({ error: "Essa skill não esta registrada" });
     }
 
-    const topicIsValid = await topicEntities.findAll({
+    const topicIsValid = await postEntities.findAll({
         where: {
             title: infoBody.title,
             user_id_create_topic: infoBody.user_id_create_topic,

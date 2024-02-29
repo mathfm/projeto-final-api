@@ -7,7 +7,7 @@ import { updateEmailMiddleware } from "../shared/middleware/user/updateUserEmail
 import { verifyIdUserMiddleware } from "../shared/middleware/user/verifyIdUser.middleware.js";
 import { updateUserMiddleware } from "../shared/middleware/user/updateUser.middleware.js";
 import { createUserMiddleware } from "../shared/middleware/user/createUser.middleware.js";
-import { createUser, updateEmail, deleteUser, getUser, registerUserSkill, updateProfile, updatePassword, deleteUserSkill } from "../controllers/User.controller.js";
+import { createUser, updateEmail, deleteUser, getUser, registerUserSkill, updateProfile, updatePassword, deleteUserSkill } from "../controllers/user.controller.js";
 
 
 const userRouter = Router();

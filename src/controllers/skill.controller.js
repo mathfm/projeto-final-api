@@ -1,5 +1,5 @@
 import { database } from "../database/connection.js";
-import { skillEntities } from "../entities/Skill.entities.js";
+import { skillEntities } from "../entities/skill.entities.js";
 
 
 export const createSkill = async (req, res) => {

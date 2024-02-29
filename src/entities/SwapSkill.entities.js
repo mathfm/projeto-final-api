@@ -1,9 +1,9 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
-import { userEntity } from "./User.entities.js";
+import { userEntities } from "./User.entities.js";
 import { skillEntities } from "./Skill.entities.js";
 
-export const swapSkillEntity = database.define("tb_swap_skill", {
+export const swapSkillEntities = database.define("tb_swap_skill", {
     id: {
         type: DataTypes.UUID,
         unique: true,
@@ -16,22 +16,22 @@ export const swapSkillEntity = database.define("tb_swap_skill", {
     }
 })
 
-swapSkillEntity.belongsTo(userEntity, {
+swapSkillEntities.belongsTo(userEntities, {
     foreignKey: 'user_sender_id',
     constraints: true,
 });
 
-swapSkillEntity.belongsTo(userEntity, {
+swapSkillEntities.belongsTo(userEntities, {
     foreignKey: 'user_recipient_id',
     constraints: true,
 });
 
-swapSkillEntity.belongsTo(skillEntities, {
+swapSkillEntities.belongsTo(skillEntities, {
     foreignKey: 'skill_desired_id',
     constraints: true,
 });
 
-swapSkillEntity.belongsTo(skillEntities, {
+swapSkillEntities.belongsTo(skillEntities, {
     foreignKey: 'skill_offered_id',
     constraints: true,
 });

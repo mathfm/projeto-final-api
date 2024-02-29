@@ -1,10 +1,9 @@
 import express from "express";
 import { userRouter } from "./routes/User.routes.js";
 import { testConnection } from "./database/connection.js";
-import { skillRouter } from "./routes/Skill.routes.js";
-import { topicRouter } from "./routes/Topic.routes.js";
-import { swapSkillRouter } from "./routes/SwapSkill.routes.js";
-
+import { skillRouter } from "./routes/skill.routes.js";
+import { topicRouter } from "./routes/topic.routes.js";
+import { swapSkillRouter } from "./routes/swapSkill.routes.js";
 
 
 const app = express();

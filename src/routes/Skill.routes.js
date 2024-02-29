@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createSkill, getSkill, deleteSkill, updateSkill, getAllSkill } from "../controllers/Skill.controller.js";
-import { createSkillMiddleware } from "../shared/middleware/skill/Create.middleware.js";
-import { verifyIdSkillMiddleware } from "../shared/middleware/skill/SkillVerifyID.middleware.js";
-import { skillUpdateMiddleware } from "../shared/middleware/skill/Update.middleware.js";
-import { deleteSkillMiddleware } from "../shared/middleware/skill/Delete.middleware.js";
+import { createSkill, getSkill, deleteSkill, updateSkill, getAllSkill } from "../controllers/skill.controller.js";
+import { createSkillMiddleware } from "../shared/middleware/skill/createSkill.middleware.js";
+import { verifyIdSkillMiddleware } from "../shared/middleware/skill/verifyIdSkill.middleware.js";
+import { updateSkillMiddleware } from "../shared/middleware/skill/updateSkill.middleware.js";
+import { deleteSkillMiddleware } from "../shared/middleware/skill/deleteSkill.middleware.js";
 
 export const skillRouter = Router();
 
@@ -19,7 +19,7 @@ skillRouter.get("/skill/", (req, res) => {
     return getAllSkill(req, res);
 })
 
-skillRouter.put("/skill/:skill_id/update", verifyIdSkillMiddleware, skillUpdateMiddleware, async (req, res) => {
+skillRouter.put("/skill/:skill_id/update", verifyIdSkillMiddleware, updateSkillMiddleware, async (req, res) => {
     return await updateSkill(req, res);
 });
 

@@ -1,10 +1,10 @@
-import { userEntity } from "../../../entities/User.entities.js";
+import { userEntities } from "../../../entities/User.entities.js";
 import { userSchema } from "../../schemas.js";
-import { schemaValidation } from "../../validation/SchemaValidation.js";
-import { verifiyInfoUserValidation } from "../../validation/UserInfoValidation.js";
+import { schemaValidation } from "../../validation/schema.validation.js";
+import { verifiyInfoUserValidation } from "../../validation/verifiyInfoUser.validation.js";
 
-export const userUpdateMiddleware = async (req, res, next) => { 
-    const findUser = await userEntity.findByPk(req.params.user_id);
+export const updateUserMiddleware = async (req, res, next) => { 
+    const findUser = await userEntities.findByPk(req.params.user_id);
     if (!findUser) {
         return res.status(404).json({ error: "Id do usuario é invalido, impossivel realizar a alteração." });
     }

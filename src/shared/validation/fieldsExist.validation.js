@@ -1,4 +1,4 @@
-export const fieldExist = async (entity, fieldName, value) => {
+export const fieldExistValidation = async (entity, fieldName, value) => {
     const exist = await entity.findOne({
         where: {
             [fieldName]: value

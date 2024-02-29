@@ -1,10 +1,10 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
-import { userEntity } from "./User.entities.js";
+import { userEntities } from "./User.entities.js";
 import { skillEntities } from "./Skill.entities.js";
 
 
-export const userSkillEntity = database.define("tb_user_skill", {
+export const userSkillEntities = database.define("tb_user_skill", {
     id: {
         type: DataTypes.UUID,
         unique: true,
@@ -15,12 +15,12 @@ export const userSkillEntity = database.define("tb_user_skill", {
 
 
 
-userSkillEntity.belongsTo(userEntity, {
+userSkillEntities.belongsTo(userEntities, {
     foreignKey: 'user_id',
     constraints: true,
 });
 
-userSkillEntity.belongsTo(skillEntities, {
+userSkillEntities.belongsTo(skillEntities, {
     foreignKey: 'skill_id',
     constraints: true,
 });

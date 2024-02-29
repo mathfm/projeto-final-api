@@ -1,9 +1,9 @@
 import { skillEntities } from "../../../entities/Skill.entities.js";
 import { skillSchema } from "../../schemas.js";
-import { fieldExist } from "../../validation/FieldsValidation.js";
-import { schemaValidation } from "../../validation/SchemaValidation.js";
+import { fieldExistValidation } from "../../validation/fieldsExist.validation.js";
+import { schemaValidation } from "../../validation/schema.validation.js";
 
-export const skillUpdateMiddleware = async (req, res, next) => { 
+export const updateSkillMiddleware = async (req, res, next) => { 
     const skill_id = req.params.skill_id;
     const findSkill = await skillEntities.findByPk(skill_id);
     const skill_name = (!req.body.skill_name ? findSkill.skill_name : req.body.skill_name);
@@ -21,7 +21,7 @@ export const skillUpdateMiddleware = async (req, res, next) => {
         return next();
     }
 
-    const skillExist = await fieldExist(skillEntities, "skill_name", skill_name);
+    const skillExist = await fieldExistValidation(skillEntities, "skill_name", skill_name);
     if (skillExist) {
         return res.status(400).json({ error: "Essa skill ja existe." });
     }

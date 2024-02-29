@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { topicMiddleware } from "../shared/middleware/Topic.middleware.js";
+import { topicMiddleware } from "../shared/middleware/topic/Topic.middleware.js";
 import { topicEntities } from "../entities/Topic.entities.js";
 
 

@@ -1,8 +1,8 @@
-import { skillEntities } from "../../entities/Skill.entities.js";
-import { topicEntities } from "../../entities/Topic.entities.js"
-import { userEntity } from "../../entities/User.entities.js";
-import { topicSchema } from "../schemas.js";
-import { schemaValidation } from "../validation/SchemaValidation.js"
+import { skillEntities } from "../../../entities/Skill.entities.js";
+import { topicEntities } from "../../../entities/Topic.entities.js"
+import { userEntities } from "../../../entities/User.entities.js";
+import { topicSchema } from "../../schemas.js";
+import { schemaValidation } from "../../validation/schema.validation.js"
 
 
 export const topicMiddleware = async (req, res, next) => {
@@ -18,7 +18,7 @@ export const topicMiddleware = async (req, res, next) => {
     }
 
     const [userExist, skillExist] = await Promise.all([
-        userEntity.findByPk(infoBody.user_id_create_topic),
+        userEntities.findByPk(infoBody.user_id_create_topic),
         skillEntities.findByPk(infoBody.skill_id_category)
     ])
 

@@ -1,6 +1,6 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
-import { userEntity } from "./User.entities.js";
+import { userEntities } from "./User.entities.js";
 import { skillEntities } from "./Skill.entities.js";
 
 export const topicEntities = database.define("tb_topic", {
@@ -21,7 +21,7 @@ export const topicEntities = database.define("tb_topic", {
 
 })
 
-topicEntities.belongsTo(userEntity, {
+topicEntities.belongsTo(userEntities, {
     foreignKey: 'user_id_create_topic',
     constraints: true,
 });

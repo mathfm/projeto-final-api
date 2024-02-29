@@ -1,13 +1,13 @@
 
 import { skillEntities } from "../../../entities/Skill.entities.js";
-import { userSkillEntity } from "../../../entities/UserSkill.entities.js";
+import { userSkillEntities } from "../../../entities/UserSkill.entities.js";
 import { userSkillSchema } from "../../schemas.js";
-import { fieldExist } from "../../validation/FieldsValidation.js";
-import { schemaValidation } from "../../validation/SchemaValidation.js";
+import { fieldExistValidation } from "../../validation/fieldsExist.validation.js";
+import { schemaValidation } from "../../validation/schema.validation.js";
 
 
 export const verificyExistUserSkill = async (objectUser) => {
-    const userSkillExist = await userSkillEntity.findAll({
+    const userSkillExist = await userSkillEntities.findAll({
         where: {
             user_id: objectUser.user_id,
             skill_id: objectUser.skill_id
@@ -16,7 +16,7 @@ export const verificyExistUserSkill = async (objectUser) => {
     return userSkillExist;
 }
 
-export const userSkillMiddleare = async (req, res, next) => {
+export const createSkillMiddleware = async (req, res, next) => {
 
     const user_id = req.params.user_id;
     const skill_id = req.body.skill_id;
@@ -28,7 +28,7 @@ export const userSkillMiddleare = async (req, res, next) => {
             return res.status(400).json({ errors: schemaUserSkillErrors});
         }
         
-        const skillExist = await fieldExist(skillEntities, "id", skill_id);
+        const skillExist = await fieldExistValidation(skillEntities, "id", skill_id);
 
 
         if (!skillExist) {

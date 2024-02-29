@@ -1,25 +1,26 @@
 import { Router } from "express";
-import { createUser, deleteUser, deleteUserSkill, getAllSkillUser, getUser, registerUserSkill, updateEmail, updatePassword, updateProfile } from "../controllers/User.controller.js";
-import { userSkillMiddleare } from "../shared/middleware/userskill/UserSkill.middleware.js";
-import { verifyIdUserSkillMiddleware } from "../shared/middleware/userskill/verifyIDUserSkill.middleware.js";
-import { userMiddleware } from "../shared/middleware/user/Create.middleware.js";
-import { updatePasswordMiddleware } from "../shared/middleware/user/PasswordUpdate.middleware.js";
-import { updateEmalMiddleware } from "../shared/middleware/user/EmailUpdate.middleware.js";
-import { verifyIdUserMiddleware } from "../shared/middleware/user/UserVerifyID.middleware.js";
-import { userUpdateMiddleware } from "../shared/middleware/user/UserUpdate.middleware.js";
+
+import { createSkillMiddleware } from "../shared/middleware/userskill/createUserSkill.middleware.js";
+import { verifyIdUserSkillMiddleware } from "../shared/middleware/userskill/verifyIdUserSkill.middleware.js";
+import { updateUserPasswordMiddleware } from "../shared/middleware/user/updateUserPassword.middleware.js";
+import { updateEmailMiddleware } from "../shared/middleware/user/updateUserEmail.middleware.js";
+import { verifyIdUserMiddleware } from "../shared/middleware/user/verifyIdUser.middleware.js";
+import { updateUserMiddleware } from "../shared/middleware/user/updateUser.middleware.js";
+import { createUserMiddleware } from "../shared/middleware/user/createUser.middleware.js";
+import { createUser, updateEmail, deleteUser, getUser, registerUserSkill, updateProfile, updatePassword, deleteUserSkill } from "../controllers/User.controller.js";
 
 
 const userRouter = Router();
 
-userRouter.post("/register-user", userMiddleware, async (req, res) => { 
+userRouter.post("/register-user", createUserMiddleware, async (req, res) => { 
     return await createUser(req, res);
 })
 
-userRouter.patch("/user/:user_id/change-password", updatePasswordMiddleware, async (req, res) => {
+userRouter.patch("/user/:user_id/change-password", updateUserPasswordMiddleware, async (req, res) => {
     return await updatePassword(req, res);
 })
 
-userRouter.patch("/user/:user_id/change-email", updateEmalMiddleware, async (req, res) => {
+userRouter.patch("/user/:user_id/change-email", updateEmailMiddleware, async (req, res) => {
     return await updateEmail(req, res);
 })
 
@@ -31,11 +32,11 @@ userRouter.get("/user/:user_id/", verifyIdUserMiddleware, async (req, res) => {
     return await getUser(req, res);
 })
 
-userRouter.post("/user/:user_id/register-skill", userSkillMiddleare, async(req, res) => {
+userRouter.post("/user/:user_id/register-skill", createSkillMiddleware, async(req, res) => {
     return await registerUserSkill(req, res);
 })
 
-userRouter.put("/user/:user_id/edit-profile", userUpdateMiddleware, async (req, res) => {
+userRouter.put("/user/:user_id/edit-profile", updateUserMiddleware, async (req, res) => {
     return await updateProfile(req, res);
 })
 

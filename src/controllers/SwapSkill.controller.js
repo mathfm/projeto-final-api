@@ -1,5 +1,5 @@
 import { database } from "../database/connection.js";
-import { swapSkillEntity } from "../entities/SwapSkill.entities.js";
+import { swapSkillEntities } from "../entities/SwapSkill.entities.js";
 
 
 export const createSwapSkill = async (req, res) => {
@@ -12,8 +12,8 @@ export const createSwapSkill = async (req, res) => {
             skill_offered_id: req.body.skill_offered_id
         }
 
-        await swapSkillEntity.create(userInvited);
-        const resultCreate = await swapSkillEntity.findOne({
+        await swapSkillEntities.create(userInvited);
+        const resultCreate = await swapSkillEntities.findOne({
             where: {
                 user_sender_id: req.params.user_sender_id,
                 user_recipient_id: req.body.user_recipient_id,
@@ -32,7 +32,7 @@ export const createSwapSkill = async (req, res) => {
 export const getSwapSkills = async (req, res) => { 
     await database.sync();
     try {
-        const swapSkills = await swapSkillEntity.findAll({
+        const swapSkills = await swapSkillEntities.findAll({
             where: {
                 user_sender_id: req.params.user_id
             }
@@ -47,7 +47,7 @@ export const deleteSwapSkill = async (req, res) => {
     try {
         await database.sync();
         const { swap_skill_id } = req.params;
-        await swapSkillEntity.destroy({ where: { id: swap_skill_id } });
+        await swapSkillEntities.destroy({ where: { id: swap_skill_id } });
         return res.status(200).json({ sucess: "Convite deletado com sucesso!" });        
     } catch (error) {
         return res.status(404).json({ error: error.message });

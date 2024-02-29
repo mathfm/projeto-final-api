@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { createSwapSkill, deleteSwapSkill, getSwapSkills } from "../controllers/SwapSkill.controller.js";
-import { swapSkillMiddleware } from "../shared/middleware/swapskill/SwapSkill.middleware.js";
-import { verifyIdSwapSkillMiddleware } from "../shared/middleware/swapskill/IdSwapSkillVerify.middleware.js";
-import { verifyIdUserMiddleware } from "../shared/middleware/user/UserVerifyID.middleware.js";
+import { createSwapSkill, deleteSwapSkill, getSwapSkills } from "../controllers/swapSkill.controller.js";
+import { createSwapSkillMiddleware } from "../shared/middleware/swapskill/createSwapSkill.middleware.js";
+import { verifyIdUserMiddleware } from "../shared/middleware/user/verifyIdUser.middleware.js";
+import { verifyIdSwapSkillMiddleware } from "../shared/middleware/swapskill/verifyIdSwapSkill.middleware.js";
+
 
 export const swapSkillRouter = Router();
 
-swapSkillRouter.post("/:user_sender_id/invited/", swapSkillMiddleware, async (req, res) => {
+swapSkillRouter.post("/:user_sender_id/invited/", createSwapSkillMiddleware, async (req, res) => {
     return createSwapSkill(req, res);
 });
 

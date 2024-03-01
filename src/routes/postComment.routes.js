@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { createPostComment, deletePostComment, getAllPostComment, getPostComment, updatePostComment } from "../controllers/postComment.controller.js";
+import { createCommentMiddleware } from "../shared/middleware/comments/createComment.middleware.js";
 
 export const postCommentRouter = Router();
 
-postCommentRouter.post("/:user_id/:post_id/create-comment", async (req, res) => {
+postCommentRouter.post("/:user_id/:post_id/create-comment", createCommentMiddleware, async (req, res) => {
     return createPostComment(req, res);
 });
 

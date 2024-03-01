@@ -22,7 +22,6 @@ export const createSwapSkill = async (req, res) => {
             }
         })
         return res.status(201).json({ message: "Convite enviado com sucesso!", invited: resultCreate });
-
     } catch (error) {
         return res.status(404).json({ error: error.message });
     }

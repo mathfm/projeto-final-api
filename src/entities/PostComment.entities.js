@@ -1,7 +1,7 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
-import { userEntity } from "./User.entities.js";
 import { postEntities } from "./Post.entities.js"
+import { userEntities } from "./User.entities.js";
 
 
 export const postCommentEntities = database.define("tb_comment_post", {
@@ -12,18 +12,18 @@ export const postCommentEntities = database.define("tb_comment_post", {
         defaultValue: Sequelize.UUIDV4,
     },
 
-    content: {
+    comment: {
         type: DataTypes.TEXT,
     },
 })
 
-postCommentEntities.belongsTo(userEntity, {
-    foreignKey: 'user_id_post',
+postCommentEntities.belongsTo(userEntities, {
+    foreignKey: 'user_id',
     constraints: true,
 });
 
 postCommentEntities.belongsTo(postEntities, {
-    foreignKey: 'post_id_commented',
+    foreignKey: 'post_id',
     constraints: true,
 });
 

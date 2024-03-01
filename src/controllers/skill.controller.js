@@ -48,7 +48,6 @@ export const updateSkill = async (req, res) =>{
     }
 };
 
-
 export const deleteSkill = async (req, res)=>{
     try{
         await database.sync();

@@ -1,7 +1,7 @@
 import { database } from "../database/connection.js";
 import { DataTypes, Sequelize } from "sequelize";
 
-const userEntities = database.define("tb_user", {
+export const userEntities = database.define("tb_user", {
     id: {
         type: DataTypes.UUID,
         unique: true,
@@ -29,6 +29,3 @@ const userEntities = database.define("tb_user", {
     }
 })
 
-
-
-export { userEntities };

@@ -4,6 +4,7 @@ import { testConnection } from "./database/connection.js";
 import { skillRouter } from "./routes/skill.routes.js";
 import { swapSkillRouter } from "./routes/swapSkill.routes.js";
 import { postRouter } from "./routes/post.routes.js";
+import { postCommentRouter } from "./routes/postComment.routes.js";
 
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(userRouter);
 app.use(skillRouter);
 app.use(postRouter);
 app.use(swapSkillRouter);
-
+app.use(postCommentRouter);
 
 
 

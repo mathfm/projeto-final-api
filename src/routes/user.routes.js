@@ -10,7 +10,7 @@ import { createUserMiddleware } from "../shared/middleware/user/createUser.middl
 import { createUser, updateEmail, deleteUser, getUser, registerUserSkill, updateProfile, updatePassword, deleteUserSkill } from "../controllers/user.controller.js";
 
 
-const userRouter = Router();
+export const userRouter = Router();
 
 userRouter.post("/register-user", createUserMiddleware, async (req, res) => { 
     return await createUser(req, res);
@@ -48,4 +48,3 @@ userRouter.get("/user/:user_id/skills", verifyIdUserMiddleware, async (req, res)
     return getAllSkillUser(req, res);
 })
 
-export { userRouter };

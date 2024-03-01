@@ -23,7 +23,6 @@ skillRouter.put("/skill/:skill_id/update", verifyIdSkillMiddleware, updateSkillM
     return await updateSkill(req, res);
 });
 
-
 skillRouter.delete("/skill/:skill_id/delete-skill", verifyIdSkillMiddleware, deleteSkillMiddleware, async (req, res) => {
     return deleteSkill(req, res);
 });

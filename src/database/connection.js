@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-const database = new Sequelize("db_forum", "root", "", {
+export const database = new Sequelize("db_forum", "root", "", {
     host: "localhost",
     dialect: "mysql"
 }) 
@@ -15,4 +15,3 @@ export async function testConnection() {
     }
 }
 
-export { database };

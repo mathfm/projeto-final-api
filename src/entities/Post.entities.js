@@ -12,7 +12,7 @@ export const postEntities = database.define("tb_post", {
     },
 
     title: {
-        type: DataTypes.STRING(25),
+        type: DataTypes.STRING(50),
     },    
 
     description: {

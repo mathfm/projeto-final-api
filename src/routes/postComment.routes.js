@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createPostComment, deletePostComment, getAllPostComment, getPostComment, updatePostComment } from "../controllers/postComment.controller.js";
-import { createCommentMiddleware } from "../shared/middleware/comments/createComment.middleware.js";
+import { createCommentMiddleware } from "../shared/middleware/postcomment/createPostComment.middleware.js";
 
 export const postCommentRouter = Router();
 

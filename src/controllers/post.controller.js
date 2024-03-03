@@ -20,7 +20,7 @@ export const updatePost = async (req, res) => {
         skill_id: req.body.skill_id
     }
     await postEntities.update(post, { where: { id: req.params.post_id } });
-    return res.status(201).json({ message: "post atualizado com sucesso!", post: await postEntities.findByPk(post_id) });
+    return res.status(200).json({ message: "post atualizado com sucesso!", post: await postEntities.findByPk(post_id) });
 }
 
 export const getPost = async (req, res) => {

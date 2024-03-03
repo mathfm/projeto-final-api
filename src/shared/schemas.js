@@ -26,11 +26,11 @@ export const swapSkillSchema = object({
     skill_desired_id: string().required().length(36)
 });
 
-export const topicSchema = object({
+export const postSchema = object({
     title: string().required().min(3).max(50).lowercase(),
     description: string().required().min(5).max(200).lowercase(),
-    user_id_create_topic: string().required().length(36),
-    skill_id_category: string().required().length(36)
+    author_id: string().required().length(36),
+    skill_id: string().required().length(36)
 })
 
 export const schemaReduceGenerator = (schema, properties) => {

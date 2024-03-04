@@ -8,7 +8,7 @@ export const deletePostMiddleware = async (req, res, next) => {
     
 
     if (author_id !== findPost.author_id) {
-        return res.status(400).json({ error: "Você não tem autorização para deletar esse post." });
+        return res.status(403).json({ error: "Você não tem autorização para deletar esse post." });
     }
 
     next();

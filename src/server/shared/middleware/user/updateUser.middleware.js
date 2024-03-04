@@ -21,7 +21,7 @@ export const updateUserMiddleware = async (req, res, next) => {
     const userValid = await verifiyInfoUserValidation({ username, email });
 
     if (!userValid) {
-        return res.status(404).json({ error: "Um dos dados que você digitou ja foram registrados" });
+        return res.status(400).json({ error: "Um dos dados que você digitou ja foram registrados" });
     } 
 
     next();

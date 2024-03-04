@@ -1,9 +1,7 @@
-import { database } from "../database/connection.js";
 import { swapSkillEntities } from "../entities/SwapSkill.entities.js";
 
 
 export const createSwapSkill = async (req, res) => {
-    await database.sync();
     try {
         const userInvited = {
             user_sender_id: req.params.user_id,
@@ -22,7 +20,6 @@ export const createSwapSkill = async (req, res) => {
 
 
 export const getSwapSkills = async (req, res) => { 
-    await database.sync();
     try {
         const swapSkills = await swapSkillEntities.findAll({
             where: {
@@ -37,7 +34,6 @@ export const getSwapSkills = async (req, res) => {
 
 export const deleteSwapSkill = async (req, res) => { 
     try {
-        await database.sync();
         const { swap_skill_id } = req.params;
         await swapSkillEntities.destroy({ where: { id: swap_skill_id } });
         return res.status(200).json({ sucess: "Convite deletado com sucesso!" });        

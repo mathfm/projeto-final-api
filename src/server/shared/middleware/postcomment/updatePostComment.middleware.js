@@ -9,7 +9,7 @@ export const updatePostCommentMiddleware = async (req, res, next) => {
     const postEdit = await postCommentEntities.findOne({ id: comment_id });
 
     if (postEdit.user_id !== user_id) {
-        return res.status(400).json({ error: "Você não tem autorização para editar este comentário." });
+        return res.status(403).json({ error: "Você não tem autorização para editar este comentário." });
     }
 
     const schemaComment = schemaReduceGenerator(postCommentSchema, ["comment"]);

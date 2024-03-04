@@ -10,7 +10,7 @@ export const deletePostCommentMiddleware = async (req, res, next) => {
     const postAuthor = await postEntities.findOne({ id: commentUser.post_id });
 
     if (!commentUser.user_id === user_id || postAuthor.author_id !== user_id) {
-        return res.status(400).json({ error: "Você não tem autorização para deletar esse comentario." });
+        return res.status(403).json({ error: "Você não tem autorização para deletar esse comentario." });
     }
 
     next();

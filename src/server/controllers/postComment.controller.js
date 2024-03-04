@@ -31,7 +31,7 @@ export const updatePostComment = async (req, res) => {
     const { comment } = req.body;
     await postCommentEntities.update({ comment: comment }, { where: { id: comment_id } });
     const postComment = await postCommentEntities.findOne({ where: { id: comment_id } });
-    return res.status(200).json({ postComment });
+    return res.status(201).json({ postComment });
 };
 
 export const deletePostComment = async (req, res) => {

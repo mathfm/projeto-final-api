@@ -8,7 +8,7 @@ import { postCommentRouter } from "./routes/postComment.routes.js";
 import cors from "cors";
 
 
-const server = express();
+export const server = express();
 
 server.use(cors());
 server.use(express.json());
@@ -20,5 +20,4 @@ server.use(postCommentRouter);
 
 
 
-export { server };
 

@@ -109,16 +109,6 @@ Uma API cuja ideia e promover o conhecimento, é promover o conhecimento, 
 | :---------- | :--------- 
 | `password`      | `string` | 
 
-#### Exibir informações do usuario
-```http
-  GET /user/${user_id}
-```
-
-#### Deletar usuario
-```http
-  DELETE /user/${user_id}/delete-profile
-```
-
 
 #### Registar skill
 ```http

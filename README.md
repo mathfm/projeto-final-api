@@ -221,7 +221,7 @@ Clone o projeto
 Entre no diretório do projeto
 
 ```bash
-  cd gerenciador-de-projetos-api
+  cd projeto-final-api
 ```
 
 Instale as dependências

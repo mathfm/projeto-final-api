@@ -55,7 +55,7 @@ export const updatePostComment = async (req, res) => {
 
 export const deletePostComment = async (req, res) => {
     const { comment_id } = req.params;
-    const result = postCommentSerivce.deletePostComment(comment_id);
+    const result = await postCommentSerivce.deletePostComment(comment_id);
 
     if (typeof result !== "object" || !result) {
         return res.status(500).json({ error: result})

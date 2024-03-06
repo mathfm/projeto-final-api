@@ -34,8 +34,8 @@ export const deleteSwapSkill = async (req, res) => {
     const { swap_skill_id } = req.params;
     const result = await swapSkillService.deleteSwapSkill(swap_skill_id);
 
-    if (typeof result !== "object" && result == null) {
-        return res.status(404).json({ error: result });
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result });
     }
 
     return res.status(200).json(result);

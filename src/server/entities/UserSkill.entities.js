@@ -18,11 +18,13 @@ export const userSkillEntities = database.define("tb_user_skill", {
 userSkillEntities.belongsTo(userEntities, {
     foreignKey: 'user_id',
     constraints: true,
+    onDelete: 'CASCADE',
 });
 
 userSkillEntities.belongsTo(skillEntities, {
     foreignKey: 'skill_id',
     constraints: true,
+    onDelete: 'RESTRICT',
 });
 
 

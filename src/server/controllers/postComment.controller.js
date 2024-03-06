@@ -1,42 +1,66 @@
-import { postCommentEntities } from "../entities/PostComment.entities.js";
+import { PostCommentSerivce } from "../services/postComment.service.js";
 
+const postCommentSerivce = new PostCommentSerivce();
 export const createPostComment = async (req, res) => {
-    const post = {
-        user_id: req.params.user_id,
-        post_id: req.params.post_id,
-        comment: req.body.comment
-    }
-    await postCommentEntities.create(post);
-
-    const postComment = await postCommentEntities.findOne({ where: { user_id: post.user_id, post_id: post.post_id } });
     
-    return res.status(201).json({ message: "Comentario registrado", postComment: postComment });
+    const { user_id, post_id } = req.params;
+    const { comment } = req.body;
+    const result = await postCommentSerivce.createPostComment(user_id, post_id, comment);
 
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result });
+    }
+
+    return res.status(201).json(result);
+    
 }
 
 export const getAllPostComment = async (req, res) => {
     const { post_id } = req.params;
-    const postComments = await postCommentEntities.findAll({ where: { post_id: post_id } });
-    return res.status(200).json({ postComments });
+    const result = await postCommentSerivce.getAllPostComment(post_id);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result})
+    }
+
+    return res.status(200).json(result);
+
 };
 
 export const getPostComment = async (req, res) => { 
     const { comment_id } = req.params;
-    const postComment = await postCommentEntities.findOne({ where: { id: comment_id } });
-    return res.status(200).json({ postComment });
+    const result = await postCommentSerivce.getPostComment(comment_id);
+    
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result})
+    }
+
+    return res.status(200).json(result);
+
 }
 
 export const updatePostComment = async (req, res) => { 
     const { comment_id } = req.params;
     const { comment } = req.body;
-    await postCommentEntities.update({ comment: comment }, { where: { id: comment_id } });
-    const postComment = await postCommentEntities.findOne({ where: { id: comment_id } });
-    return res.status(201).json({ postComment });
+    
+    const result = await postCommentSerivce.updatePostComment(comment_id, comment);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result})
+    }
+
+    return res.status(201).json(result);
+
 };
 
 export const deletePostComment = async (req, res) => {
     const { comment_id } = req.params;
-    await postCommentEntities.destroy({ where: { id: comment_id } });
-    return res.status(200).json({ sucess: "Comentario deletado com sucesso!" });
+    const result = postCommentSerivce.deletePostComment(comment_id);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result})
+    }
+
+    return res.status(201).json(result);
 
 };

@@ -1,44 +1,44 @@
-import { swapSkillEntities } from "../entities/SwapSkill.entities.js";
+import { SwapSkillService } from "../services/swapSkill.service.js";
 
-
+const swapSkillService = new SwapSkillService();
 export const createSwapSkill = async (req, res) => {
-    try {
-        const userInvited = {
-            user_sender_id: req.params.user_id,
-            user_recipient_id: req.body.user_recipient_id,
-            skill_desired_id: req.body.skill_desired_id,
-            skill_offered_id: req.body.skill_offered_id
-        }
 
-        await swapSkillEntities.create(userInvited);
-        const resultCreate = await swapSkillEntities.findOne({ where: userInvited });
-        return res.status(201).json({ message: "Convite enviado com sucesso!", invited: resultCreate });
-    } catch (error) {
-        return res.status(404).json({ error: error.message });
+    const { user_id } = req.params;
+    const { user_recipient_id, skill_desired_id, skill_offered_id } = req.body;
+        
+    const result = await swapSkillService.createSwapSkill(user_id, user_recipient_id, skill_desired_id, skill_offered_id);
+
+    if (typeof result !== "object" && result == null) {
+        return res.status(404).json({ error: result });
     }
-}
 
+    return res.status(201).json(result);
+        
+};
 
-export const getSwapSkills = async (req, res) => { 
-    try {
-        const swapSkills = await swapSkillEntities.findAll({
-            where: {
-                user_sender_id: req.params.user_id
-            }
-        });
-        return res.status(200).json({ swapSkills });
-    } catch (error) {
-        return res.status(404).json({ error: error.message });
+export const getSwapSkills = async (req, res) => {
+    
+    const { user_id } = req.params;
+    const result = await swapSkillService.getSwapSkills(user_id);
+
+    if (typeof result !== "object" && result == null) {
+        return res.status(404).json({ error: result });
     }
-}
 
-export const deleteSwapSkill = async (req, res) => { 
-    try {
-        const { swap_skill_id } = req.params;
-        await swapSkillEntities.destroy({ where: { id: swap_skill_id } });
-        return res.status(200).json({ sucess: "Convite deletado com sucesso!" });        
-    } catch (error) {
-        return res.status(404).json({ error: error.message });
+    return res.status(200).json(result);
+        
+};
+
+export const deleteSwapSkill = async (req, res) => {
+    
+    const { swap_skill_id } = req.params;
+    const result = await swapSkillService.deleteSwapSkill(swap_skill_id);
+
+    if (typeof result !== "object" && result == null) {
+        return res.status(404).json({ error: result });
     }
-}
+
+    return res.status(200).json(result);
+        
+};
 

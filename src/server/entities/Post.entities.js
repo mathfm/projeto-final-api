@@ -1,6 +1,6 @@
 import { database } from "../database/connection.js";
-import { DataTypes, Sequelize } from "sequelize";
 import { userEntities } from "./User.entities.js";
+import { DataTypes, Sequelize } from "sequelize";
 import { skillEntities } from "./Skill.entities.js";
 
 export const postEntities = database.define("tb_post", {
@@ -24,10 +24,12 @@ export const postEntities = database.define("tb_post", {
 postEntities.belongsTo(userEntities, {
     foreignKey: 'author_id',
     constraints: true,
+    onDelete: 'CASCADE',
 });
 
 postEntities.belongsTo(skillEntities, {
     foreignKey: 'skill_id',
     constraints: true,
+    onDelete: 'RESTRICT',
 });
 

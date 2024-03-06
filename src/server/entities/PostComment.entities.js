@@ -20,10 +20,12 @@ export const postCommentEntities = database.define("tb_comment_post", {
 postCommentEntities.belongsTo(userEntities, {
     foreignKey: 'user_id',
     constraints: true,
+    onDelete: 'CASCADE',
 });
 
 postCommentEntities.belongsTo(postEntities, {
     foreignKey: 'post_id',
     constraints: true,
+    onDelete: 'CASCADE',
 });
 

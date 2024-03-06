@@ -1,41 +1,68 @@
-import { postEntities } from "../entities/Post.entities.js";
+import { PostSerivce } from "../services/post.service.js";
 
+const postSerivce = new PostSerivce(); 
 export const createPost = async (req, res) => {
-    const post = {
-        title: req.body.title,
-        description: req.body.description,
-        author_id: req.params.user_id,
-        skill_id: req.body.skill_id
+    
+    const { user_id } = req.params;
+    const { title, description, skill_id } = req.body;
+    const result = await postSerivce.createPost(title, description, user_id, skill_id);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result });
     }
-    await postEntities.create(post);
-    return res.status(201).json({ message: "post criado com sucesso!", post: await postEntities.findAll() });
+
+    return res.status(201).json(result);
+
 }
 
 export const updatePost = async (req, res) => { 
-    const { post_id } = req.params;
-    const post = {
-        title: req.body.title,
-        description: req.body.description,
-        author_id: req.params.user_id,
-        skill_id: req.body.skill_id
+
+    const { post_id, user_id } = req.params;
+    const { title, description, skill_id } = req.body
+    const result = await postSerivce.updatePost(post_id, title, description, user_id, skill_id);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result });
     }
-    await postEntities.update(post, { where: { id: req.params.post_id } });
-    return res.status(201).json({ message: "post atualizado com sucesso!", post: await postEntities.findByPk(post_id) });
+
+    return res.status(200).json(result);
+
 }
 
 export const getPost = async (req, res) => {
+
     const { post_id } = req.params;
-    const post = await postEntities.findByPk(post_id);
-    return res.status(200).json({ message: "post encontrado com sucesso!", post });
+    const result = await postSerivce.getPost(post_id);
+
+    if (typeof result !== "object" || !result) {
+        return res.status(500).json({ error: result });
+    }
+
+    return res.status(200).json(result);
+
 }
 
 export const getAllPost = async (req, res) => {
-    const post = await postEntities.findAll();
-    return res.status(200).json({ message: "Todos os post foram carregados com sucesso!", post: post });
+
+    const result = await postSerivce.getAllPost();
+
+    if (typeof result!== "object" ||!result) {
+        return res.status(500).json({ error: result });
+    }
+
+    return res.status(200).json(result);
+
 }
 
 export const deletePost = async (req, res) => { 
+    
     const { post_id } = req.params;
-    await postEntities.destroy({ where: { id: post_id} });
-    return res.status(200).json({ message: "post deletado com sucesso!", post: await postEntities.findAll() });
+    const result = await postSerivce.deletePost(post_id);
+
+    if (typeof result!== "object" ||!result) {
+        return res.status(500).json({ error: result });
+    }
+
+    return res.status(200).json(result);
+
 }

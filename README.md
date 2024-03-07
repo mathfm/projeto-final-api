@@ -1,5 +1,5 @@
 
-# # Connect Forum
+# # Bright Idea
 
 Uma API cuja ideia é promover o conhecimento, feita para que usuários possam não só aprender habilidades como também possam compartilhá-la com o próximo, incentivando uma rede de aprendizado coletiva.
 

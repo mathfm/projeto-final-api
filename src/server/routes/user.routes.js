@@ -12,6 +12,12 @@ import { createUser, updateEmail, deleteUser, getUser, registerUserSkill, update
 
 export const userRouter = Router();
 
+userRouter.get('/', (req, res) => { 
+    return res.status(200).json({
+        message: "Acesse as rotas para continuar"
+    })
+})
+
 userRouter.post("/register-user", createUserMiddleware, async (req, res) => { 
     return await createUser(req, res);
 })

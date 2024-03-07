@@ -1,7 +1,7 @@
 
 # # Connect Forum
 
-Uma API cuja ideia e promover o conhecimento, é promover o conhecimento, feita para que usuários possam não só aprender habilidades como também possam compartilhá-la com o próximo, insentivando uma rede de aprendizado coletiva.
+Uma API cuja ideia é promover o conhecimento, feita para que usuários possam não só aprender habilidades como também possam compartilhá-la com o próximo, incentivando uma rede de aprendizado coletiva.
 
 
 ## Funcionalidades
@@ -221,7 +221,7 @@ Clone o projeto
 Entre no diretório do projeto
 
 ```bash
-  cd gerenciador-de-projetos-api
+  cd projeto-final-api
 ```
 
 Instale as dependências

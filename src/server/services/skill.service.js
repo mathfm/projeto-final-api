@@ -8,7 +8,7 @@ export class SkillService {
                 description: description
             }
             await skillEntities.create(newSkill);
-            const registerSkill = await skillEntities.findOne(newSkill);
+            const registerSkill = await skillEntities.findOne({where: {skill_name: skill_name, description: description}});
             return { message: "Skill registrada com sucesso!", skill: registerSkill };
         } catch (error) {
             return error.message;

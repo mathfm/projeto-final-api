@@ -29,6 +29,20 @@ export const getSwapSkills = async (req, res) => {
         
 };
 
+export const updateSwapSkill = async (req, res) => {
+    
+    const { swap_skill_id } = req.params;
+    const { skill_offered_id, skill_desired_id } = req.body;
+    const result = await swapSkillService.updateSwapSkill(swap_skill_id, skill_offered_id, skill_desired_id);
+
+    if (typeof result !== "object" && result == null) {
+        return res.status(404).json({ error: result });
+    }
+
+    return res.status(201).json(result);
+        
+};
+
 export const deleteSwapSkill = async (req, res) => {
     
     const { swap_skill_id } = req.params;

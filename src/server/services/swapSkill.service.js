@@ -26,6 +26,16 @@ export class SwapSkillService {
         }
     };
 
+    async updateSwapSkill(swap_skill_id, skill_offered_id, skill_desired_id) {
+        try {
+            await swapSkillEntities.update({ skill_offered_id: skill_offered_id, skill_desired_id: skill_desired_id }, { where: { id: swap_skill_id } });
+            const resultSwapSkillupdate = await swapSkillEntities.findOne({ where: { id: swap_skill_id } });
+            return { message: "Convite atualizado com sucesso!", invited: resultSwapSkillupdate };
+        } catch (error) {
+            return error.message;
+        }
+    }
+
     async deleteSwapSkill(swap_skill_id) {
         try {
             await swapSkillEntities.destroy({ where: { id: swap_skill_id } });

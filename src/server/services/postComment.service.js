@@ -1,4 +1,5 @@
 import { postCommentEntities } from "../entities/PostComment.entities.js";
+import { userEntities } from "../entities/User.entities.js";
 
 export class PostCommentSerivce {
     async createPostComment(user_id, post_id ,comment) {
@@ -20,7 +21,15 @@ export class PostCommentSerivce {
 
     async getAllPostComment(post_id) {
         try {
-            const resultPostComment = await postCommentEntities.findAll({ where: { post_id: post_id } });
+            const resultPostComment = await postCommentEntities.findAll({
+              where: { post_id: post_id },
+              include: [
+                {
+                  model: userEntities,
+                  attributes: ["username"],
+                },
+              ],
+            });
             return { message: "comentarios do post encontrados com sucesso!", postComment: resultPostComment };
         }
         catch (error) {

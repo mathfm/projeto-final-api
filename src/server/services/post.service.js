@@ -1,4 +1,5 @@
 import { postEntities } from "../entities/Post.entities.js";
+import { userEntities } from "../entities/User.entities.js";
 
 export class PostSerivce {
     async createPost(title, description, author_id, skill_id) {
@@ -44,7 +45,12 @@ export class PostSerivce {
 
     async getAllPost() {
         try {
-            const post = await postEntities.findAll();
+            const post = await postEntities.findAll({
+                include: [{
+                    model: userEntities,
+                    attributes: ["username"]
+                }]
+            });
             return { message: "Todos os post foram carregados com sucesso", post: post };
         } catch (error) {
             return error.message;
